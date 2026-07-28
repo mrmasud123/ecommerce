@@ -33,9 +33,9 @@ export default function AuthVisual() {
       {/* Brand */}
       <a href="/" className="relative z-10 flex items-center gap-2">
         <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-lg font-black text-white">
-          S
+          M
         </span>
-        <span className="text-xl font-extrabold text-white">Sellzy</span>
+        <span className="text-xl font-extrabold text-white">MCommerce</span>
       </a>
 
       {/* Headline */}

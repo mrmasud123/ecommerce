@@ -88,10 +88,10 @@ export default function Header() {
           >
             <Search size={22} />
           </button>
-          <ModeToggle />
+          {/* <ModeToggle /> */}
           <Link
             href="/login"
-            className="hidden items-center gap-2 text-sm font-medium text-ink hover:text-brand md:flex"
+            className="items-center gap-2 text-sm font-medium text-ink hover:text-brand md:flex"
           >
             <User size={20} />
             <span>
@@ -125,14 +125,6 @@ export default function Header() {
       <nav className="hidden border-t border-line md:block">
         <div className="container-x flex h-12 items-center gap-8 text-sm font-medium text-ink">
           {navLinks.map((link) => (
-            // <Link
-            //   key={link.label}
-            //   href={link.href}
-            //   className="flex items-center gap-1 hover:text-brand"
-            // >
-            //   {link.label}
-            //   {link.hasMenu && <ChevronDown size={14} />}
-            // </Link>
             <NavLink
               href={link.href}
               key={link.label}
@@ -166,10 +158,14 @@ export default function Header() {
             </div>
             <ul className="space-y-4 text-sm font-medium text-ink">
               {navLinks.map((link) => (
-                <li key={link.label} className="flex items-center justify-between border-b border-line pb-3">
-                  {link.label}
-                  {link.hasMenu && <ChevronDown size={14} />}
-                </li>
+                <NavLink
+                href={link.href}
+                key={link.label}
+                className="flex items-center gap-1 hover:text-brand"
+              >
+                {link.label}
+                {link.hasMenu && <ChevronDown size={14} />}
+              </NavLink>
               ))}
             </ul>
           </div>

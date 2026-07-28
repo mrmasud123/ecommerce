@@ -138,7 +138,7 @@ export default function AuthCard({ initialMode = "login" }: { initialMode?: Mode
             </div>
 
             <p className="mt-6 text-center text-sm text-gray-500">
-              {mode === "login" ? "New to Sellzy?" : "Already have an account?"}{" "}
+              {mode === "login" ? "New to MCommerce?" : "Already have an account?"}{" "}
               <button
                 type="button"
                 onClick={() => switchTo(mode === "login" ? "signup" : "login")}
