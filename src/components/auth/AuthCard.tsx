@@ -26,9 +26,9 @@ export default function AuthCard({ initialMode = "login" }: { initialMode?: Mode
           {/* Mobile brand */}
           <a href="/" className="mb-8 flex items-center gap-2 lg:hidden">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-sm font-black text-white">
-              S
+              M
             </span>
-            <span className="text-lg font-extrabold text-ink">Sellzy</span>
+            <span className="text-lg font-extrabold text-ink">Mcommerce</span>
           </a>
 
           {/* Sliding tab switcher */}
