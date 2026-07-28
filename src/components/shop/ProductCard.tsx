@@ -1,8 +1,14 @@
 "use client";
+import { motion, type Variants } from "framer-motion";
+
 
 import { Heart, Eye, ShoppingCart, Star, Store, Truck, Bell } from "lucide-react";
 import type { Product } from "@/lib/data";
 import Link from "next/link";
+export const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+};
 
 export default function ProductCard({
   product,
@@ -12,10 +18,15 @@ export default function ProductCard({
   view?: "grid" | "list";
 }) {
   const outOfStock = product.badge === "Out of Stock";
-
   if (view === "list") {
     return (
-      <div className="group flex gap-5 rounded-2xl border border-gray-100 bg-white p-4 transition-shadow hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.15)]">
+      <motion.div
+        variants={cardVariants}
+        whileHover={{ y: -4 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition-shadow hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.15)]"
+      >
         <div className={`relative flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br ${product.hue} text-5xl`}>
           {product.icon}
           {product.badge && <BadgeTag badge={product.badge} discount={product.discount} corner="both" />}
@@ -36,12 +47,19 @@ export default function ProductCard({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition-shadow hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.15)]">
+    <motion.div
+      variants={cardVariants}
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition-shadow hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.15)]"
+    >
+  
       <div className={`relative flex aspect-square items-center justify-center overflow-hidden bg-gradient-to-br ${product.hue} text-7xl transition-transform duration-500 group-hover:scale-105`}>
         {product.icon}
         {product.badge && <BadgeTag badge={product.badge} discount={product.discount} />}
@@ -75,8 +93,10 @@ export default function ProductCard({
           )}
         </div>
       </div>
-    </div>
+    
+    </motion.div>
   );
+  
 }
 
 function BadgeTag({

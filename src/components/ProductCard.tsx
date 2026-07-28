@@ -60,7 +60,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <p className="mt-1 truncate text-[11px] text-muted">{product.shop}</p>
 
       <h3 className="mt-0.5 line-clamp-2 min-h-[2.5rem] text-[13px] font-medium leading-tight text-ink">
-        {product.name}
+        <Link href={`/shop/product-details`}>{product.name}</Link>
       </h3>
 
       <div className="mt-1 flex items-center gap-1 text-[11px] text-muted">

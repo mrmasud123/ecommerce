@@ -1,5 +1,5 @@
 "use client";
-
+import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import {
   Search,
@@ -213,13 +213,17 @@ export default function ShopClient({ products }: { products: Product[] }) {
                 </button>
               </div>
             ) : (
-                <RevealStagger className={view === "grid" ? "grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4" : "flex flex-col gap-4"}>
-                {pageItems.map((product) => (
-                  <RevealItem key={product.id}>
-                    <ProductCard product={product} view={view} />
-                  </RevealItem>
-                ))}
-              </RevealStagger>
+              <motion.div
+                  key={`${page}-${sort}-${query}-${filters.shops.join(",")}-${filters.maxPrice}-${filters.minRating}-${filters.inStockOnly}`}
+                  initial="hidden"
+                  animate="visible"
+                  variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}
+                  className={view === "grid" ? "grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4" : "flex flex-col gap-4"}
+                >
+                  {pageItems.map((product) => (
+                    <ProductCard key={product.id} product={product} view={view} />
+                  ))}
+                </motion.div>
             )}
 
             {totalPages > 1 && (

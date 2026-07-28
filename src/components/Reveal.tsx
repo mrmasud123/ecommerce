@@ -25,7 +25,7 @@ export default function Reveal({
   children,
   direction = "up",
   delay = 0,
-  duration = 0.6,
+  duration = 0.2,
   amount = 0.2,
   once = true,
   className,

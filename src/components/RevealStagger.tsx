@@ -20,7 +20,7 @@ export function RevealStagger({
   return (
     <motion.div
       className={className}
-      initial="hidden"
+      // initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount }}
       variants={{ hidden: {}, visible: { transition: { staggerChildren: stagger } } }}
