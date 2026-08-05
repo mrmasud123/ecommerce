@@ -23,7 +23,10 @@ jobs:
       - name: Prune to production-only dependencies
         run: npm prune --omit=dev
 
-      - name: Deploy to cPanel via FTP
+      - name: Archive node_modules
+        run: tar -czf node_modules.tar.gz node_modules
+
+      - name: Deploy build + archive via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -38,8 +41,9 @@ jobs:
             src/**
             **/*.md
             .env*
+            node_modules/**
 
-      - name: Restart Node.js app
+      - name: Extract node_modules on server via SSH
         run: |
-          curl -sS "https://${{ secrets.CPANEL_HOST }}:2083/execute/NodeJS/restart_app?app_name=nodeapp" \
-            -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_API_TOKEN }}"
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd nodeapp && rm -rf node_modules && tar -xzf node_modules.tar.gz && rm node_modules.tar.gz"
