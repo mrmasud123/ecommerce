@@ -46,4 +46,4 @@ jobs:
       - name: Extract node_modules on server via SSH
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "cd nodeapp && rm -rf node_modules && tar -xzf node_modules.tar.gz && rm node_modules.tar.gz"
+            "cd ecommerce && rm -rf node_modules && tar -xzf node_modules.tar.gz && rm node_modules.tar.gz"
