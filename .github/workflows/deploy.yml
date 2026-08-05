@@ -1,43 +1,29 @@
-name: Deploy to cPanel
-
 on:
   push:
-    branches: [main]
-
+    branches:
+      - main
+name: 🚀 Deploy website on push
 jobs:
-  deploy:
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: '16'
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy to cPanel via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          server-dir: /
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            node_modules/**
-            src/**
-            **/*.md
-            .env*
-
-      - name: Restart Node.js app
+      - name: 🔨 Build Project
         run: |
-          curl -sS "https://${{ secrets.CPANEL_HOST }}:2083/execute/NodeJS/restart_app?app_name=ecommerce" \
-            -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_API_TOKEN }}"
+          npm install
+          npm run build
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{secrets.FTP_SERVER}}
+          username: ${{secrets.FTP_USERNAME}}
+          password: ${{ secrets.FTP_PASSWORD }}
