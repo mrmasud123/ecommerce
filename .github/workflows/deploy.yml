@@ -20,9 +20,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Prune to production-only dependencies
-        run: npm prune --omit=dev
-
       - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -35,6 +32,7 @@ jobs:
             **/.git*
             **/.git*/**
             **/.github/**
+            node_modules/**
             src/**
             **/*.md
             .env*
